@@ -64,7 +64,7 @@ export function Navbar() {
     return () => { window.removeEventListener("scroll", showScrollbar); if (hideTimer) clearTimeout(hideTimer); document.documentElement.classList.remove("is-scrolling"); };
   }, []);
 
-  useEffect(() => { setMobileMenuOpen(false); }, [pathname]);
+  const onNavigationClick = useCallback(() => setMobileMenuOpen(false), []);
 
   useEffect(() => {
     if (!mobileMenuOpen) return;
@@ -104,9 +104,9 @@ export function Navbar() {
         </div>
         <nav ref={mobileNavigationRef} id="mobile-navigation" aria-label="Мобильная навигация" aria-hidden={!mobileMenuOpen} className={`overflow-hidden rounded-b-3xl border-x border-b border-brand/20 bg-[#090b10]/[0.97] shadow-[0_24px_60px_rgba(0,0,0,0.55),inset_0_1px_0_rgba(255,106,0,0.12)] backdrop-blur-xl transition-[opacity,max-height,transform] duration-200 xl:hidden ${mobileMenuOpen ? "max-h-[90dvh] translate-y-0 opacity-100" : "pointer-events-none max-h-0 -translate-y-2 opacity-0"}`}>
           <div className="flex flex-col gap-2 px-4 py-5 sm:px-6">
-            <NavLink item={MOBILE_NAV_ITEMS[0]} pathname={pathname} firstRef={firstMenuLinkRef} onClick={closeMobileMenu} mobile />
+            <NavLink item={MOBILE_NAV_ITEMS[0]} pathname={pathname} firstRef={firstMenuLinkRef} onClick={onNavigationClick} mobile />
             <div className="mb-1 flex min-h-[58px] items-center rounded-xl border border-brand/20 bg-brand/5 p-0 shadow-[0_0_18px_rgba(255,106,0,0.08)]"><LetsPlayShowcase onOpen={() => { closeMobileMenu(); menuButtonRef.current?.focus(); }} /></div>
-            {MOBILE_NAV_ITEMS.slice(1).map((item) => <NavLink key={item.href} item={item} pathname={pathname} onClick={closeMobileMenu} mobile />)}
+            {MOBILE_NAV_ITEMS.slice(1).map((item) => <NavLink key={item.href} item={item} pathname={pathname} onClick={onNavigationClick} mobile />)}
             <div className="mt-3 flex items-center justify-between gap-3"><div className="flex gap-2">{SOCIALS.map((s) => <a key={s.label} href={s.href} target="_blank" rel="noopener noreferrer" aria-label={s.label} className={`flex h-9 w-9 items-center justify-center transition-colors group ${s.hover}`}><Image src={`/${s.file}.svg`} alt={s.label} width={20} height={20} style={{ filter: s.filter }} /></a>)}</div><span className="text-[10px] uppercase tracking-[0.2em] text-white/35">PIXEL PLAY</span></div>
           </div>
         </nav>
