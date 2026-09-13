@@ -18,10 +18,7 @@ export function DeferredHeroVideo() {
       return;
     }
 
-    // Avoid starting the ~11.5 MB background video on low-end desktops.
-    const device = navigator as Navigator & {
-      deviceMemory?: number;
-    };
+    const device = navigator as Navigator & { deviceMemory?: number };
     const lowEndDevice =
       device.deviceMemory !== undefined &&
       device.deviceMemory <= 4 &&
@@ -41,7 +38,7 @@ export function DeferredHeroVideo() {
   }, []);
 
   return (
-    <>
+    <div className="pointer-events-none fixed inset-0 -z-10 overflow-hidden" aria-hidden="true">
       <Image
         src="/club-play.jpg"
         alt=""
@@ -49,8 +46,7 @@ export function DeferredHeroVideo() {
         priority
         quality={70}
         sizes="100vw"
-        className="fixed inset-0 -z-10 object-cover object-center"
-        aria-hidden="true"
+        className="object-cover object-center"
       />
       {enabled && (
         <video
@@ -59,12 +55,13 @@ export function DeferredHeroVideo() {
           loop
           playsInline
           preload="none"
-          aria-hidden="true"
-          className="fixed inset-0 -z-10 h-full w-full object-cover opacity-70"
+          className="absolute inset-0 h-full w-full object-cover opacity-40"
         >
           <source src="/hero-desktop.mp4" type="video/mp4" />
         </video>
       )}
-    </>
+      <div className="absolute inset-0 bg-black/35" />
+      <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_35%,transparent_0%,rgba(0,0,0,0.18)_48%,rgba(0,0,0,0.72)_100%)]" />
+    </div>
   );
 }
