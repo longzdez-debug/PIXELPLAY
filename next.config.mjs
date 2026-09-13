@@ -4,6 +4,10 @@ const nextConfig = {
     formats: ["image/webp", "image/avif"],
     minimumCacheTTL: 86400,
   },
+  // Keep third-party animation imports as small as possible when a client island needs them.
+  experimental: {
+    optimizePackageImports: ["framer-motion"],
+  },
   compress: true,
   poweredByHeader: false,
   reactStrictMode: true,
