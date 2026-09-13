@@ -8,23 +8,6 @@ const PartnersInteractive = dynamic(
 export default function PartnersPage() {
   return (
     <div className="partners-page relative min-h-screen">
-      <style>{`
-        @media (max-width: 767px) {
-          .partners-page [class~="backdrop-blur-sm"],
-          .partners-page [class~="backdrop-blur-md"],
-          .partners-page [class~="backdrop-blur-lg"],
-          .partners-page [class~="backdrop-blur-xl"],
-          .partners-page [class~="backdrop-blur-2xl"],
-          .partners-page [class~="backdrop-blur-3xl"] {
-            backdrop-filter: none !important;
-            -webkit-backdrop-filter: none !important;
-          }
-          .partners-page [class~="blur-2xl"],
-          .partners-page [class~="blur-3xl"] {
-            display: none !important;
-          }
-        }
-      `}</style>
       <div className="pointer-events-none fixed inset-0 -z-10">
         <div className="absolute inset-0 bg-[radial-gradient(ellipse_120%_80%_at_50%_-10%,#1a1f3d_0%,#101322_40%,#0a0a0f_100%)]" />
         <div
