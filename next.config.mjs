@@ -4,11 +4,8 @@ const nextConfig = {
     formats: ["image/webp", "image/avif"],
     minimumCacheTTL: 86400,
   },
-  // Keep third-party animation imports out of the client bundle.
-  // PartnersInteractive still uses the existing API surface, but the runtime is now CSS/no-op based.
-  experimental: {
-    optimizePackageImports: ["framer-motion"],
-  },
+  // Keep the legacy Framer Motion API surface without shipping the runtime.
+  // The Turbopack alias resolves imports to the tiny CSS/no-op compatibility shim.
   turbopack: {
     resolveAlias: {
       "framer-motion": "./components/partners/motion-lite.tsx",
