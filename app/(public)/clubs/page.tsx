@@ -1,9 +1,14 @@
 "use client";
 
+import dynamic from "next/dynamic";
 import { useState } from "react";
 import Image from "next/image";
 import { CLUBS, clubStatusLabel, getClubBySlug, totalPcCount } from "@/lib/site-data";
-import { BookingModal } from "@/components/booking/BookingModal";
+
+const BookingModal = dynamic(
+  () => import("@/components/booking/BookingModal").then((mod) => mod.BookingModal),
+  { ssr: false },
+);
 
 export default function ClubsPage() {
   const [activeSlug, setActiveSlug] = useState(CLUBS[0].slug);
@@ -76,7 +81,7 @@ export default function ClubsPage() {
           <div className="cyber-panel overflow-hidden"><Image src={active.images.hall} alt={`Схема зала ${active.name}`} width={1024} height={878} sizes="(max-width: 1024px) 100vw, 1024px" className="h-auto w-full object-contain" /></div>
         </div>
       </div>
-      <BookingModal open={bookingOpen} initialClubSlug={active.slug} onClose={() => setBookingOpen(false)} />
+      {bookingOpen && <BookingModal open initialClubSlug={active.slug} onClose={() => setBookingOpen(false)} />}
     </main>
   );
 }
