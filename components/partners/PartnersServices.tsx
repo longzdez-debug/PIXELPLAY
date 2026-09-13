@@ -46,13 +46,14 @@ export default function PartnersServices() {
         ))}
       </div>
       <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
-        {items.map(([category, title, desc]) => (
-          <article key={`${category}-${title}`} className="cyber-panel group rounded-2xl border border-white/10 bg-[#0d0d12]/90 p-5 transition-transform duration-300 hover:-translate-y-1 hover:border-brand/35">
+        {items.map((item) => {
+          const [category, title, desc] = item;
+          return <article key={`${category}-${title}`} className="cyber-panel group rounded-2xl border border-white/10 bg-[#0d0d12]/90 p-5 transition-transform duration-300 hover:-translate-y-1 hover:border-brand/35">
             <p className="text-[10px] font-bold uppercase tracking-[0.18em] text-brand/70">{category}</p>
             <h3 className="mt-3 text-lg font-bold text-white">{title}</h3>
             <p className="mt-3 text-sm leading-6 text-white/55">{desc}</p>
-          </article>
-        ))}
+          </article>;
+        })}
       </div>
     </section>
   );
