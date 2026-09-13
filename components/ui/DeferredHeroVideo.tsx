@@ -18,6 +18,18 @@ export function DeferredHeroVideo() {
       return;
     }
 
+    // Avoid starting the ~11.5 MB background video on low-end desktops.
+    const device = navigator as Navigator & {
+      deviceMemory?: number;
+    };
+    const lowEndDevice =
+      device.deviceMemory !== undefined &&
+      device.deviceMemory <= 4 &&
+      navigator.hardwareConcurrency !== undefined &&
+      navigator.hardwareConcurrency <= 4;
+
+    if (lowEndDevice) return;
+
     const start = () => setEnabled(true);
     if ("requestIdleCallback" in window) {
       const id = window.requestIdleCallback(start, { timeout: 3000 });
