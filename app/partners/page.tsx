@@ -21,10 +21,10 @@ export default function PartnersPage() {
               "radial-gradient(ellipse 90% 70% at 50% 30%, black 20%, transparent 80%)",
           }}
         />
-        <div className="absolute -top-32 left-1/2 h-[420px] w-[800px] -translate-x-1/2 rounded-full bg-blue-600/[0.13] blur-[130px]" />
-        <div className="absolute left-[-8%] top-[35%] h-[380px] w-[520px] rounded-full bg-brand/[0.08] blur-[130px]" />
-        <div className="absolute right-[-8%] top-[45%] h-[380px] w-[520px] rounded-full bg-brand/[0.08] blur-[130px]" />
-        <div className="absolute bottom-[-10%] left-1/2 h-[300px] w-[700px] -translate-x-1/2 rounded-full bg-white/[0.045] blur-[130px]" />
+        <div className="absolute -top-32 left-1/2 hidden h-[420px] w-[800px] -translate-x-1/2 rounded-full bg-blue-600/[0.13] blur-[130px] md:block" />
+        <div className="absolute left-[-8%] top-[35%] hidden h-[380px] w-[520px] rounded-full bg-brand/[0.08] blur-[130px] md:block" />
+        <div className="absolute right-[-8%] top-[45%] hidden h-[380px] w-[520px] rounded-full bg-brand/[0.08] blur-[130px] md:block" />
+        <div className="absolute bottom-[-10%] left-1/2 hidden h-[300px] w-[700px] -translate-x-1/2 rounded-full bg-white/[0.045] blur-[130px] md:block" />
       </div>
       <PartnersInteractive />
     </div>
