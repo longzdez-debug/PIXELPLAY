@@ -1,6 +1,12 @@
 "use client";
 
-import { Fragment, forwardRef, type ComponentPropsWithoutRef, type ElementType, type ReactNode } from "react";
+import {
+  Fragment,
+  forwardRef,
+  type ComponentPropsWithoutRef,
+  type ElementType,
+  type ReactNode,
+} from "react";
 
 const MOTION_PROPS = new Set([
   "animate",
@@ -29,9 +35,16 @@ function stripMotionProps(props: Record<string, unknown>) {
 }
 
 function createMotionComponent<T extends ElementType>(Component: T) {
-  return forwardRef<unknown, ComponentPropsWithoutRef<T>>((props, ref) => (
-    <Component {...stripMotionProps(props as Record<string, unknown>)} ref={ref} />
-  ));
+  const MotionComponent = forwardRef<unknown, ComponentPropsWithoutRef<T>>(
+    (props, ref) => (
+      <Component {...stripMotionProps(props as Record<string, unknown>)} ref={ref} />
+    ),
+  );
+
+  MotionComponent.displayName =
+    typeof Component === "string" ? `Motion(${Component})` : "MotionComponent";
+
+  return MotionComponent;
 }
 
 type MotionFactory = {
