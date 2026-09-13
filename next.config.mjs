@@ -4,9 +4,15 @@ const nextConfig = {
     formats: ["image/webp", "image/avif"],
     minimumCacheTTL: 86400,
   },
-  // Keep third-party animation imports as small as possible when a client island needs them.
+  // Keep third-party animation imports out of the client bundle.
+  // PartnersInteractive still uses the existing API surface, but the runtime is now CSS/no-op based.
   experimental: {
     optimizePackageImports: ["framer-motion"],
+  },
+  turbopack: {
+    resolveAlias: {
+      "framer-motion": "./components/partners/motion-lite.tsx",
+    },
   },
   compress: true,
   poweredByHeader: false,
