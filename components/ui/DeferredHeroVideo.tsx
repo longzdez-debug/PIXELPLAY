@@ -10,13 +10,21 @@ export function DeferredHeroVideo() {
     const media = window.matchMedia("(max-width: 767px), (prefers-reduced-motion: reduce)");
     if (media.matches) return;
 
+    const connection = (navigator as Navigator & {
+      connection?: { saveData?: boolean; effectiveType?: string };
+    }).connection;
+
+    if (connection?.saveData || connection?.effectiveType === "slow-2g" || connection?.effectiveType === "2g") {
+      return;
+    }
+
     const start = () => setEnabled(true);
     if ("requestIdleCallback" in window) {
-      const id = window.requestIdleCallback(start, { timeout: 1800 });
+      const id = window.requestIdleCallback(start, { timeout: 3000 });
       return () => window.cancelIdleCallback(id);
     }
 
-    const timeoutId = setTimeout(start, 1200);
+    const timeoutId = setTimeout(start, 2200);
     return () => clearTimeout(timeoutId);
   }, []);
 
