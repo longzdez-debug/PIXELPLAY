@@ -58,7 +58,17 @@ export function AnimatePresence({ children }: { children: ReactNode }) {
   return <>{children}</>;
 }
 
-export function MotionConfig({ children }: { children: ReactNode; reducedMotion?: string }) {
+export function MotionConfig({
+  children,
+  reducedMotion,
+  mode,
+}: {
+  children: ReactNode;
+  reducedMotion?: string;
+  mode?: string;
+}) {
+  void reducedMotion;
+  void mode;
   return <Fragment>{children}</Fragment>;
 }
 
