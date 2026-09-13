@@ -86,7 +86,7 @@ export function Navbar() {
 
   return (
     <>
-      <header className={`fixed inset-x-0 top-0 z-50 transition-all duration-300 ${scrolled ? "bg-void/85 backdrop-blur-md border-b border-brand/15 py-3" : "bg-transparent py-5"}`}>
+      <header className={`fixed inset-x-0 top-0 z-50 transition-all duration-300 ${scrolled ? "bg-void/85 backdrop-blur-md py-3" : "bg-transparent py-5"}`}>
         <div className="relative flex items-center px-4 md:px-8">
           <Logo priority size={scrolled ? 100 : 120} className="shrink-0 transition-all duration-300" />
           <nav className="pointer-events-none absolute inset-x-0 hidden h-8 xl:block">
