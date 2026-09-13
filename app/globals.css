@@ -57,6 +57,23 @@ a:focus-visible, button:focus-visible { outline: 2px solid var(--color-brand-lig
   .cyber-panel { backdrop-filter: none; -webkit-backdrop-filter: none; }
   .cyber-button::after { animation: none; }
   .text-gradient-brand { animation: none; }
+
+  /* Mobile: keep the partners page visually intact while disabling expensive blur layers. */
+  .partners-page [class~="backdrop-blur-sm"],
+  .partners-page [class~="backdrop-blur-md"],
+  .partners-page [class~="backdrop-blur-lg"],
+  .partners-page [class~="backdrop-blur-xl"],
+  .partners-page [class~="backdrop-blur-2xl"],
+  .partners-page [class~="backdrop-blur-3xl"] {
+    backdrop-filter: none !important;
+    -webkit-backdrop-filter: none !important;
+  }
+
+  .partners-page [class~="blur-2xl"],
+  .partners-page [class~="blur-3xl"],
+  .partners-page [class~="blur-[130px]"] {
+    display: none !important;
+  }
 }
 
 @media (prefers-reduced-motion: reduce) {
