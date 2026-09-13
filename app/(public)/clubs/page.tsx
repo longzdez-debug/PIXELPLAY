@@ -17,7 +17,7 @@ export default function ClubsPage() {
 
   return (
     <main className="relative overflow-hidden">
-      <div className="fixed inset-0 -z-10 bg-cover bg-center bg-no-repeat opacity-70" style={{ backgroundImage: "url('/club-play.jpg')" }} aria-hidden="true" />
+      <Image src="/club-play.jpg" alt="" fill priority quality={55} sizes="100vw" className="fixed inset-0 -z-10 object-cover object-center opacity-70" aria-hidden="true" />
       <div className="fixed inset-0 -z-10 bg-gradient-to-b from-void/30 via-void/25 to-void" aria-hidden="true" />
 
       <div className="mx-auto max-w-7xl px-4 pb-24 pt-28 sm:px-6 md:px-10 md:pt-32">
@@ -36,11 +36,7 @@ export default function ClubsPage() {
                   <Image src={club.images.club} alt={club.name} fill sizes="(max-width: 768px) 100vw, 33vw" className="object-cover transition-transform duration-500 group-hover:scale-105" />
                 </div>
                 <div className="flex items-start justify-between">
-                  <div>
-                    <h3 className="font-display text-lg font-bold text-white">{club.name}</h3>
-                    <p className="mt-1 text-sm text-white/45">{club.address}</p>
-                    <p className="mt-0.5 text-xs text-white/30">{club.hours}</p>
-                  </div>
+                  <div><h3 className="font-display text-lg font-bold text-white">{club.name}</h3><p className="mt-1 text-sm text-white/45">{club.address}</p><p className="mt-0.5 text-xs text-white/30">{club.hours}</p></div>
                   <div className="flex flex-col items-end gap-2">
                     {isActive && <span className="h-2 w-2 rounded-full bg-brand shadow-[0_0_10px_rgba(255,106,0,0.8)]" />}
                     <span className="flex items-center gap-1.5 text-[10px] font-bold uppercase tracking-wider text-emerald-400"><span className="h-1.5 w-1.5 animate-glow-pulse rounded-full bg-emerald-400" />{clubStatusLabel(club.status)}</span>
@@ -59,22 +55,16 @@ export default function ClubsPage() {
 
         <div key={`${active.slug}-zones`} className="mx-auto max-w-5xl page-reveal">
           <div className="mb-6 flex flex-wrap items-center gap-2">
-            {active.zones.map((zone) => (
-              <button key={zone.name} type="button" onClick={() => setActiveZone(zone.name)} aria-pressed={activeZone === zone.name} className={`min-h-11 px-4 py-2 text-xs font-bold uppercase tracking-[0.15em] transition-all ${activeZone === zone.name ? "bg-brand text-white shadow-[0_0_16px_rgba(255,106,0,0.4)]" : "border border-white/10 text-white/50 hover:border-brand/50 hover:text-white"}`}>{zone.name}</button>
-            ))}
+            {active.zones.map((zone) => <button key={zone.name} type="button" onClick={() => setActiveZone(zone.name)} aria-pressed={activeZone === zone.name} className={`min-h-11 px-4 py-2 text-xs font-bold uppercase tracking-[0.15em] transition-all ${activeZone === zone.name ? "bg-brand text-white shadow-[0_0_16px_rgba(255,106,0,0.4)]" : "border border-white/10 text-white/50 hover:border-brand/50 hover:text-white"}`}>{zone.name}</button>)}
           </div>
 
-          {samplePc && (
-            <div key={activeZone} className="cyber-panel p-6 page-reveal">
-              <div className="flex flex-col gap-6 md:flex-row md:items-center">
-                <div className="flex items-center gap-4"><div className="flex h-16 w-16 shrink-0 flex-col items-center justify-center border-2 border-brand bg-brand/10"><span className="text-[10px] uppercase tracking-widest text-white/50">{zonePrice} BYN</span></div><p className="font-display text-xl font-bold text-white">Зона {activeZone}</p></div>
-                <div className="grid flex-1 grid-cols-2 gap-x-6 gap-y-1.5 text-sm md:grid-cols-3">
-                  <SpecRow label="Видеокарта" value={samplePc.gpu} /><SpecRow label="Процессор" value={samplePc.cpu} /><SpecRow label="Монитор" value={`${samplePc.monitor} · ${samplePc.refreshRate}Hz`} /><SpecRow label="ОЗУ" value={samplePc.ram} /><SpecRow label="Кресло" value={samplePc.chair} /><SpecRow label="Мышь" value={samplePc.mouse} /><SpecRow label="Клавиатура" value={samplePc.keyboard} />
-                </div>
-                <div className="text-right"><p className="font-display text-2xl font-bold text-brand">{zonePrice} BYN</p><p className="text-xs text-white/40">за час · {zonePcCount} ПК</p><button type="button" onClick={() => setBookingOpen(true)} className="cyber-button mt-3 !px-5 !py-2 text-[10px]">Забронировать</button></div>
-              </div>
+          {samplePc && <div key={activeZone} className="cyber-panel p-6 page-reveal">
+            <div className="flex flex-col gap-6 md:flex-row md:items-center">
+              <div className="flex items-center gap-4"><div className="flex h-16 w-16 shrink-0 flex-col items-center justify-center border-2 border-brand bg-brand/10"><span className="text-[10px] uppercase tracking-widest text-white/50">{zonePrice} BYN</span></div><p className="font-display text-xl font-bold text-white">Зона {activeZone}</p></div>
+              <div className="grid flex-1 grid-cols-2 gap-x-6 gap-y-1.5 text-sm md:grid-cols-3"><SpecRow label="Видеокарта" value={samplePc.gpu} /><SpecRow label="Процессор" value={samplePc.cpu} /><SpecRow label="Монитор" value={`${samplePc.monitor} · ${samplePc.refreshRate}Hz`} /><SpecRow label="ОЗУ" value={samplePc.ram} /><SpecRow label="Кресло" value={samplePc.chair} /><SpecRow label="Мышь" value={samplePc.mouse} /><SpecRow label="Клавиатура" value={samplePc.keyboard} /></div>
+              <div className="text-right"><p className="font-display text-2xl font-bold text-brand">{zonePrice} BYN</p><p className="text-xs text-white/40">за час · {zonePcCount} ПК</p><button type="button" onClick={() => setBookingOpen(true)} className="cyber-button mt-3 !px-5 !py-2 text-[10px]">Забронировать</button></div>
             </div>
-          )}
+          </div>}
 
           <div className="mt-8 grid gap-4 md:grid-cols-3">
             {active.zones.slice(0, 3).map((zone, i) => <div key={zone.name} className={`cyber-panel p-5 page-reveal ${i > 0 ? `page-reveal-delay-${Math.min(i + 1, 4)}` : ""}`}><div className="flex items-center justify-between"><h4 className="font-display font-bold tracking-widest text-white">{zone.name}</h4><p className="font-display text-xl font-bold text-brand">{zone.pricePerHour} BYN<span className="text-xs text-white/40">/час</span></p></div></div>)}
