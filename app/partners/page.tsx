@@ -8,6 +8,23 @@ const PartnersInteractive = dynamic(
 export default function PartnersPage() {
   return (
     <div className="partners-page relative min-h-screen">
+      <style>{`
+        @media (max-width: 767px) {
+          .partners-page [class~="backdrop-blur-sm"],
+          .partners-page [class~="backdrop-blur-md"],
+          .partners-page [class~="backdrop-blur-lg"],
+          .partners-page [class~="backdrop-blur-xl"],
+          .partners-page [class~="backdrop-blur-2xl"],
+          .partners-page [class~="backdrop-blur-3xl"] {
+            backdrop-filter: none !important;
+            -webkit-backdrop-filter: none !important;
+          }
+          .partners-page [class~="blur-2xl"],
+          .partners-page [class~="blur-3xl"] {
+            display: none !important;
+          }
+        }
+      `}</style>
       <div className="pointer-events-none fixed inset-0 -z-10">
         <div className="absolute inset-0 bg-[radial-gradient(ellipse_120%_80%_at_50%_-10%,#1a1f3d_0%,#101322_40%,#0a0a0f_100%)]" />
         <div
@@ -23,7 +40,7 @@ export default function PartnersPage() {
         />
         <div className="absolute -top-32 left-1/2 hidden h-[420px] w-[800px] -translate-x-1/2 rounded-full bg-blue-600/[0.13] blur-[130px] md:block" />
         <div className="absolute left-[-8%] top-[35%] hidden h-[380px] w-[520px] rounded-full bg-brand/[0.08] blur-[130px] md:block" />
-        <div className="absolute right-[-8%] top-[45%] hidden h-[380px] w-[520px] rounded-full bg-brand/[0.08] blur-[130px] md:block" />
+        <div className="absolute right-[-8%] top-[45%] hidden h-[380px] w-[520px] rounded-full bg-brand/[0.08] md:block" />
         <div className="absolute bottom-[-10%] left-1/2 hidden h-[300px] w-[700px] -translate-x-1/2 rounded-full bg-white/[0.045] blur-[130px] md:block" />
       </div>
       <PartnersInteractive />
