@@ -47,6 +47,15 @@ html, body { overflow-x: hidden; }
 body { background-color: var(--color-void); color: #f5f5f5; font-family: var(--font-sans); -webkit-font-smoothing: antialiased; }
 a:focus-visible, button:focus-visible { outline: 2px solid var(--color-brand-light); outline-offset: 3px; }
 
+/* Static partners background: keep paint work in CSS instead of a hydrated inline style object. */
+.partners-grid {
+  background-image: linear-gradient(rgba(120,140,255,0.10) 1px, transparent 1px), linear-gradient(90deg, rgba(120,140,255,0.10) 1px, transparent 1px);
+  background-size: 56px 56px;
+  mask-image: radial-gradient(ellipse 90% 70% at 50% 30%, black 20%, transparent 80%);
+  -webkit-mask-image: radial-gradient(ellipse 90% 70% at 50% 30%, black 20%, transparent 80%);
+  contain: paint;
+}
+
 @media (max-width: 640px) {
   .partners-contact { display: none !important; }
   .lets-play-float { animation-duration: 5.8s; }
@@ -74,38 +83,12 @@ a:focus-visible, button:focus-visible { outline: 2px solid var(--color-brand-lig
   .partners-page [class~="blur-[130px]"] {
     display: none !important;
   }
+
+  .partners-grid {
+    background-size: 42px 42px;
+  }
 }
 
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after { scroll-behavior: auto !important; animation-duration: 0.01ms !important; animation-iteration-count: 1 !important; transition-duration: 0.01ms !important; }
-  video { display: none; }
 }
-
-@media (min-width: 2200px) {
-  .home-hero { max-width: 1200px; }
-  .home-hero h1 { font-size: 6rem; }
-  .home-club-grid, .home-stats { max-width: 1200px; }
-  .partners-content { max-width: 1440px; }
-}
-
-::selection { background: var(--color-brand); color: #fff; }
-.cyber-grid { background-image: linear-gradient(rgba(255, 106, 0, 0.18) 1px, transparent 1px), linear-gradient(90deg, rgba(255, 106, 0, 0.18) 1px, transparent 1px); background-size: 48px 48px; mask-image: radial-gradient(ellipse 80% 60% at 50% 40%, black 30%, transparent 75%); }
-.cyber-panel { position: relative; background: color-mix(in srgb, var(--color-panel) 90%, transparent); border: 2px solid rgba(255, 106, 0, 0.5); clip-path: polygon(0 0, calc(100% - 20px) 0, 100% 20px, 100% 100%, 20px 100%, 0 calc(100% - 20px)); backdrop-filter: blur(8px); transition: border-color 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease; }
-.cyber-panel:hover { border-color: rgba(255, 106, 0, 0.8); box-shadow: 0 0 40px rgba(255, 106, 0, 0.2); }
-.cyber-panel::before { content: ""; position: absolute; top: 0; left: 0; width: 60px; height: 3px; background: linear-gradient(90deg, var(--color-brand), transparent); }
-.cyber-button { position: relative; display: inline-flex; align-items: center; justify-content: center; gap: 0.5rem; padding: 0.85rem 1.75rem; font-family: var(--font-display); font-size: 0.8rem; font-weight: 700; letter-spacing: 0.2em; color: #fff; background: rgba(255, 106, 0, 0.3); border: 2px solid rgba(255, 106, 0, 0.85); clip-path: polygon(0 0, calc(100% - 14px) 0, 100% 14px, 100% 100%, 14px 100%, 0 calc(100% - 14px)); transition: all 0.25s ease; overflow: hidden; cursor: pointer; text-shadow: 0 0 8px rgba(255, 106, 0, 0.5); box-shadow: 0 0 12px rgba(255, 106, 0, 0.2); }
-.cyber-button::after { content: ""; position: absolute; inset: 0; background: linear-gradient(110deg, transparent 30%, rgba(255, 255, 255, 0.45) 50%, transparent 70%); background-size: 200% 100%; animation: shimmer 3.2s linear infinite; pointer-events: none; }
-.cyber-button:hover:not(:disabled) { background: var(--color-brand); color: #fff; border-color: var(--color-brand-light); box-shadow: 0 0 32px rgba(255, 106, 0, 0.6), inset 0 0 16px rgba(255, 255, 255, 0.2); transform: translateY(-2px); }
-.cyber-button:active:not(:disabled) { transform: translateY(0); }
-.cyber-button:disabled { opacity: 0.5; cursor: not-allowed; }
-.cyber-input { width: 100%; padding: 0.75rem 1rem; background: rgba(255, 106, 0, 0.08); border: 2px solid rgba(255, 106, 0, 0.6); border-left: 3px solid rgba(255, 106, 0, 0.9); color: #f5f5f5; font-size: 0.95rem; outline: none; transition: border-color 0.2s ease, box-shadow 0.2s ease; }
-.cyber-input:focus { border-color: rgba(255, 106, 0, 1); box-shadow: 0 0 20px rgba(255, 106, 0, 0.3); }
-.cyber-input::placeholder { color: rgba(255, 106, 0, 0.5); }
-.text-gradient-brand { background: linear-gradient(90deg, #ff6a00, #ffb066, #ffffff, #ffb066, #ff6a00); background-size: 200% auto; -webkit-background-clip: text; background-clip: text; color: transparent; animation: shimmer 5s linear infinite; }
-html { scrollbar-color: transparent transparent; }
-html.is-scrolling { scrollbar-color: rgba(255, 106, 0, 0.6) transparent; }
-::-webkit-scrollbar { width: 8px; }
-::-webkit-scrollbar-track { background: transparent; }
-::-webkit-scrollbar-thumb { background: transparent; border-radius: 4px; transition: background-color 180ms ease; }
-html.is-scrolling::-webkit-scrollbar-thumb { background: rgba(255, 106, 0, 0.6); }
-html.is-scrolling::-webkit-scrollbar-thumb:hover { background: rgba(255, 106, 0, 0.85); }
