@@ -16,8 +16,8 @@ export function DeferredHeroVideo() {
       return () => window.cancelIdleCallback(id);
     }
 
-    const timeoutId = window.setTimeout(start, 1200);
-    return () => window.clearTimeout(timeoutId);
+    const timeoutId = setTimeout(start, 1200);
+    return () => clearTimeout(timeoutId);
   }, []);
 
   return (
