@@ -7,7 +7,7 @@ const PartnersInteractive = dynamic(
 
 export default function PartnersPage() {
   return (
-    <div className="relative min-h-screen">
+    <div className="partners-page relative min-h-screen">
       <div className="pointer-events-none fixed inset-0 -z-10">
         <div className="absolute inset-0 bg-[radial-gradient(ellipse_120%_80%_at_50%_-10%,#1a1f3d_0%,#101322_40%,#0a0a0f_100%)]" />
         <div
