@@ -1,11 +1,12 @@
 "use client";
 
+import type { ReactNode } from "react";
 import { useState } from "react";
 import { BookingModal } from "./BookingModal";
 
 type Props = {
   className?: string;
-  children: React.ReactNode;
+  children: ReactNode;
 };
 
 export function BookingTrigger({ className, children }: Props) {
