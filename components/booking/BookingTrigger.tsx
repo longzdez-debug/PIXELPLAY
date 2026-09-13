@@ -1,8 +1,13 @@
 "use client";
 
+import dynamic from "next/dynamic";
 import type { ReactNode } from "react";
 import { useState } from "react";
-import { BookingModal } from "./BookingModal";
+
+const BookingModal = dynamic(
+  () => import("./BookingModal").then((mod) => mod.BookingModal),
+  { ssr: false },
+);
 
 type Props = {
   className?: string;
@@ -17,7 +22,7 @@ export function BookingTrigger({ className, children }: Props) {
       <button type="button" onClick={() => setOpen(true)} className={className}>
         {children}
       </button>
-      <BookingModal open={open} onClose={() => setOpen(false)} />
+      {open && <BookingModal open onClose={() => setOpen(false)} />}
     </>
   );
 }
