@@ -3,7 +3,6 @@
 import {
   Fragment,
   forwardRef,
-  type ComponentPropsWithoutRef,
   type ElementType,
   type ReactNode,
 } from "react";
@@ -34,12 +33,13 @@ function stripMotionProps(props: Record<string, unknown>) {
   return clean;
 }
 
-function createMotionComponent<T extends ElementType>(Component: T) {
-  const MotionComponent = forwardRef<unknown, ComponentPropsWithoutRef<T>>(
-    (props, ref) => (
-      <Component {...stripMotionProps(props as Record<string, unknown>)} ref={ref} />
-    ),
-  );
+// This is intentionally a tiny compatibility shim for the partners page.
+// The real animation runtime is removed from the bundle; animation props are
+// accepted and discarded while the underlying element renders normally.
+function createMotionComponent(Component: ElementType) {
+  const MotionComponent = forwardRef<any, any>((props, ref) => (
+    <Component {...stripMotionProps(props)} ref={ref} />
+  ));
 
   MotionComponent.displayName =
     typeof Component === "string" ? `Motion(${Component})` : "MotionComponent";
@@ -47,13 +47,8 @@ function createMotionComponent<T extends ElementType>(Component: T) {
   return MotionComponent;
 }
 
-type MotionFactory = {
-  <T extends ElementType>(component: T): ReturnType<typeof createMotionComponent<T>>;
-  [key: string]: ReturnType<typeof createMotionComponent>;
-};
-
 const motion = new Proxy(
-  ((component: ElementType) => createMotionComponent(component)) as MotionFactory,
+  ((component: ElementType) => createMotionComponent(component)) as any,
   {
     get: (_target, property: string) => createMotionComponent(property as ElementType),
   },
@@ -63,7 +58,7 @@ export function AnimatePresence({ children }: { children: ReactNode }) {
   return <>{children}</>;
 }
 
-export function MotionConfig({ children }: { children: ReactNode }) {
+export function MotionConfig({ children }: { children: ReactNode; reducedMotion?: string }) {
   return <Fragment>{children}</Fragment>;
 }
 
