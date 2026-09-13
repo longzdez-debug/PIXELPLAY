@@ -161,7 +161,7 @@ export function BookingModal({ open, initialClubSlug, onClose }: BookingModalPro
                 ← Все клубы
               </button>
               <div className="mb-6">
-                <Logo href={null} size={140} className="h-16 w-auto" priority />
+                <Logo href={null} size={140} className="h-16 w-auto" />
                 <div className="relative mt-5 h-36 overflow-hidden rounded-2xl border border-white/10">
                   <Image
                     src={selectedClub.images.club}
