@@ -1,0 +1,68 @@
+import { Navbar } from "@/components/layout/Navbar";
+import { Footer } from "@/components/layout/Footer";
+import { SITE_URL, SOCIAL_LINKS } from "@/lib/site-config";
+import { getCurrentUser } from "@/lib/auth/session";
+import { AccountOverlay } from "@/components/account/AccountOverlay";
+
+export default async function PublicLayout({ children }: { children: React.ReactNode }) {
+  const organizationJsonLd = {
+    "@context": "https://schema.org",
+    "@type": "Organization",
+    name: "PIXEL",
+    url: process.env.NEXT_PUBLIC_SITE_URL || SITE_URL,
+    logo: `${process.env.NEXT_PUBLIC_SITE_URL || SITE_URL}/logo.png`,
+    sameAs: [
+      SOCIAL_LINKS.instagram,
+      SOCIAL_LINKS.tiktok,
+      SOCIAL_LINKS.telegram,
+      SOCIAL_LINKS.youtube,
+    ],
+  };
+
+  const user =
+    process.env.NODE_ENV === "development" && process.env.PREVIEW_ACCOUNT === "1"
+      ? {
+          login: "PixelPlayUser",
+          email: "demo@pixelplay.local",
+          phone: "+7 900 000-00-00",
+          status: "active",
+          createdAt: new Date("2026-01-01T00:00:00.000Z"),
+          emailVerifiedAt: new Date("2026-01-01T00:00:00.000Z"),
+        }
+      : await getCurrentUser();
+
+  return (
+    <div className="relative flex min-h-screen flex-col">
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(organizationJsonLd) }}
+      />
+      {/* Фоновые слои: градиент + сетка + свечения (белый/оранжевый/синий) */}
+      <div className="pointer-events-none fixed inset-0 -z-10">
+        {/* Базовый градиент: тёмно-синий по краям, тёплый к центру */}
+        <div className="absolute inset-0 bg-[radial-gradient(ellipse_120%_80%_at_50%_-10%,#1a1f3d_0%,#101322_40%,#0a0a0f_100%)]" />
+        {/* Сетка */}
+        <div
+          className="absolute inset-0 opacity-[0.5]"
+          style={{
+            backgroundImage:
+              "linear-gradient(rgba(120,140,255,0.10) 1px, transparent 1px), linear-gradient(90deg, rgba(120,140,255,0.10) 1px, transparent 1px)",
+            backgroundSize: "56px 56px",
+            maskImage: "radial-gradient(ellipse 90% 70% at 50% 30%, black 20%, transparent 80%)",
+            WebkitMaskImage:
+              "radial-gradient(ellipse 90% 70% at 50% 30%, black 20%, transparent 80%)",
+          }}
+        />
+        {/* Свечения: синий сверху, оранжевый по бокам, белый снизу */}
+        <div className="absolute -top-32 left-1/2 h-[420px] w-[800px] -translate-x-1/2 rounded-full bg-blue-600/[0.13] blur-[130px]" />
+        <div className="absolute left-[-8%] top-[35%] h-[380px] w-[520px] rounded-full bg-brand/[0.08] blur-[130px]" />
+        <div className="absolute right-[-8%] top-[45%] h-[380px] w-[520px] rounded-full bg-brand/[0.08] blur-[130px]" />
+        <div className="absolute bottom-[-10%] left-1/2 h-[300px] w-[700px] -translate-x-1/2 rounded-full bg-white/[0.045] blur-[130px]" />
+      </div>
+      <Navbar />
+      <AccountOverlay user={user} />
+      <div className="relative flex-1">{children}</div>
+      <Footer />
+    </div>
+  );
+}

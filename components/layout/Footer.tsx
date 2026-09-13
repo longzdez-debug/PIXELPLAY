@@ -1,0 +1,77 @@
+import Link from "next/link";
+import { Logo } from "@/components/ui/Logo";
+import { CLUBS } from "@/lib/site-data";
+import { SOCIAL_LINKS } from "@/lib/site-config";
+
+export function Footer() {
+  return (
+    <footer className="relative border-t border-brand/15 bg-panel">
+      <div className="mx-auto grid max-w-7xl gap-10 px-4 py-10 sm:px-6 md:grid-cols-4 md:px-10 md:py-14">
+        <div>
+          <Logo size={48} />
+          <p className="mt-4 max-w-xs text-sm text-white/40">
+            Сеть компьютерных клубов. Играй на максимуме — копи бонусы и побеждай в турнирах.
+          </p>
+        </div>
+
+        <div>
+          <h4 className="mb-4 text-xs font-bold uppercase tracking-[0.25em] text-brand">Клубы</h4>
+          <ul className="space-y-2.5 text-sm text-white/50">
+            {CLUBS.map((club) => (
+              <li key={club.slug}>
+                <Link href="/clubs" className="transition-colors hover:text-white">
+                  {club.name} — {club.address}
+                </Link>
+              </li>
+            ))}
+          </ul>
+        </div>
+
+        <div>
+          <h4 className="mb-4 text-xs font-bold uppercase tracking-[0.25em] text-brand">Навигация</h4>
+          <ul className="space-y-2.5 text-sm text-white/50">
+            <li><Link href="/specs" className="transition-colors hover:text-white">Железо и цены</Link></li>
+            <li><Link href="/promos" className="transition-colors hover:text-white">Акции</Link></li>
+            <li><Link href="/partners" className="transition-colors hover:text-white">Партнёрам</Link></li>
+            <li><Link href="/rules" className="transition-colors hover:text-white">Правила</Link></li>
+          </ul>
+        </div>
+
+        <div>
+          <h4 className="mb-4 text-xs font-bold uppercase tracking-[0.25em] text-brand">Контакты</h4>
+          <ul className="space-y-2.5 text-sm text-white/50">
+            <li>
+              <a href="tel:+375293193015" className="transition-colors hover:text-white">
+                {CLUBS[0].phone}
+              </a>
+            </li>
+            <li>
+              <a href="mailto:info@pixelplay.by" className="transition-colors hover:text-white">
+                info@pixelplay.by
+              </a>
+            </li>
+            <li>
+              <a
+                href={SOCIAL_LINKS.telegramBot}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="transition-colors hover:text-white"
+              >
+                @pixelplay_bot
+              </a>
+            </li>
+          </ul>
+        </div>
+      </div>
+
+      <div className="border-t border-white/5 py-5 text-center text-xs text-white/25">
+        <p>
+          © {new Date().getFullYear()} ООО «Пиксель Плей» — сеть компьютерных клубов PIXEL. Все права защищены.
+        </p>
+        <p className="mt-1.5">
+          УНП 791332791 · 212038, г. Могилёв, ул. Мовчанского 53Б-1
+        </p>
+      </div>
+    </footer>
+  );
+}
