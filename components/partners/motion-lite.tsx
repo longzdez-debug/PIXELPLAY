@@ -54,7 +54,14 @@ const motion = new Proxy(
   },
 );
 
-export function AnimatePresence({ children }: { children: ReactNode }) {
+export function AnimatePresence({
+  children,
+  mode,
+}: {
+  children: ReactNode;
+  mode?: string;
+}) {
+  void mode;
   return <>{children}</>;
 }
 
